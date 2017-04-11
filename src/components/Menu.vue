@@ -4,7 +4,6 @@
     active-name="1"
     theme="light"
     width="auto"
-    on-select="onSelect"
     accordion>
     <div class="layout-logo-left">logo</div>
     <template v-for="(menu, index) in menuList">
@@ -12,21 +11,25 @@
       <Menu-item
         v-if="!menu.subMenu"
         :name="index + 1">
-        <Icon :type="menu.icon"></Icon>
-        {{menu.name}}
+        <router-link :to="menu.path">
+          <Icon :type="menu.icon" :size="iconSize"></Icon>
+          <span class="layout-text">{{menu.name}}</span>
+        </router-link>
       </Menu-item>
 
       <Submenu :name="index + 1"  v-if="menu.subMenu">
         <template slot="title">
-          <Icon :type="menu.icon"></Icon>
-          {{menu.name}}
+          <Icon :type="menu.icon" :size="iconSize"></Icon>
+          <span class="layout-text">{{menu.name}}</span>
         </template>
         <Menu-item
           :name="(index + 1) + '-' + (subIndex + 1)"
           v-for="(subMenu, subIndex) in menu.subMenu"
           :key="subMenu.id">
-          <Icon :type="subMenu.icon"></Icon>
-          {{subMenu.name}}
+          <router-link :to="subMenu.path">
+            <Icon :type="subMenu.icon" :size="iconSize"></Icon>
+            <span class="layout-text">{{subMenu.name}}</span>
+          </router-link>
         </Menu-item>
       </Submenu>
 
@@ -62,9 +65,6 @@ export default {
         .then(response => {
           this.menuList = response.body
         })
-    },
-    onSelect (name) {
-      console.log(name)
     }
   }
 }
