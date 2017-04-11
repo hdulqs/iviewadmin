@@ -1,0 +1,118 @@
+[{
+  "id": "10000",
+  "name": "仪表盘",
+  "path": "/dashboard",
+  "mid": "10000",
+  "desc": "一些统计信息",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100011",
+  "name": "系统管理",
+  "path": "/sysconfig",
+  "mid": "10000",
+  "desc": "系统包含的子系统的管理",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100012",
+  "name": "模块管理",
+  "path": "/mudule",
+  "mid": "10000",
+  "desc": "子系统的模块管理",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100013",
+  "name": "资源管理",
+  "path": "/resource",
+  "mid": "10000",
+  "desc": "系统包含的url资源管理",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100014",
+  "name": "菜单管理",
+  "path": "/menu",
+  "mid": "10000",
+  "desc": "系统包含的菜单的管理",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100015",
+  "name": "组织机构管理",
+  "path": "/org",
+  "mid": "10000",
+  "desc": "整套系统的组织架构",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100016",
+  "name": "用户组管理",
+  "path": "/group",
+  "mid": "10000",
+  "desc": "系统包含的用户组的管理",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100017",
+  "name": "角色管理",
+  "path": "/role",
+  "mid": "10000",
+  "desc": "系统包含的角色管理",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100018",
+  "name": "用户管理",
+  "path": "/user",
+  "mid": "10000",
+  "desc": "系统包含的用户管理",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100021",
+  "name": "数据表格",
+  "path": "/components/table",
+  "mid": "10000",
+  "desc": "一些统计信息",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100022",
+  "name": "圆圈图",
+  "path": "/components/charts",
+  "mid": "10000",
+  "desc": null,
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "10000111",
+  "name": "保存用户",
+  "path": "/user/save",
+  "mid": "10000",
+  "desc": "保存用户",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}, {
+  "id": "100000112",
+  "name": "更新用户",
+  "path": "/user/update",
+  "mid": "10000",
+  "desc": "更新用户信息",
+  "privilegess": "true",
+  "ispv": "true",
+  "pvtype": 1
+}]

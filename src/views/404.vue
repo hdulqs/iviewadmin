@@ -1,0 +1,28 @@
+<template lang="html">
+  <div class="layout-content">
+    <div class="layout-content-main">
+      <Icon type="android-sad"></Icon>
+      <p>您访问的页面已经丢到了垃圾场！</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style lang="scss" scoped>
+.layout-content {
+  .layout-content-main{
+    text-align: center;
+
+    h1 {
+      font-size: 10em;
+    }
+    p {
+      font-weight: bold;
+    }
+  }
+}
+</style>

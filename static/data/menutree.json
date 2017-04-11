@@ -1,0 +1,66 @@
+[{
+  "id": "10000",
+  "name": "仪表盘",
+  "icon":"social-windows-outline",
+  "path": "/dashboard"
+}, {
+  "id": "10001",
+  "name": "系统设置",
+  "icon": "ios-settings",
+  "subMenu": [{
+    "id": "100011",
+    "name": "系统管理",
+    "icon": "hammer",
+    "path": "/sysconfig"
+  }, {
+    "id": "100012",
+    "name": "模块管理",
+    "icon": "navicon-round",
+    "path": "/mudule"
+  }, {
+    "id": "100013",
+    "name": "资源管理",
+    "icon": "wrench",
+    "path": "/resource"
+  }, {
+    "id": "100014",
+    "name": "菜单管理",
+    "icon": "navicon",
+    "path": "/menu"
+  }, {
+    "id": "100015",
+    "name": "组织机构管理",
+    "icon": "home",
+    "path": "/org"
+  }, {
+    "id": "100016",
+    "name": "用户组管理",
+    "icon": "ios-people-outline",
+    "path": "/group"
+  }, {
+    "id": "100017",
+    "name": "角色管理",
+    "icon": "ios-person",
+    "path": "/role"
+  }, {
+    "id": "100018",
+    "name": "用户管理",
+    "icon": "ios-body",
+    "path": "/user"
+  }]
+}, {
+  "id": "10002",
+  "name": "组件",
+  "icon": "compose",
+  "subMenu": [{
+    "id": "100021",
+    "name": "数据表格",
+    "icon": "drag",
+    "path": "/components/table"
+  }, {
+    "id": "100022",
+    "name": "圆圈图",
+    "icon": "ios-circle-outline",
+    "path": "/components/charts"
+  }]
+}]

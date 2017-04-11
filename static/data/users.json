@@ -1,0 +1,41 @@
+[{
+  "id": "10000",
+  "username": "admin",
+  "name": "莫铭",
+  "email": "mobinchao@hotmail.com",
+  "phone": "13800138000",
+  "address": "广州大道1号",
+  "sex": "1"
+}, {
+  "id": "10001",
+  "username": "user1",
+  "name": "小王",
+  "email": "abcd@163.com",
+  "phone": "13900139000",
+  "address": "广州大道2号",
+  "sex": "0"
+}, {
+  "id": "10002",
+  "username": "user2",
+  "name": "孙大圣",
+  "email": "dcba@126.com",
+  "phone": "18033232211",
+  "address": "广州大道3号",
+  "sex": "1"
+}, {
+  "id": "10003",
+  "username": "user3",
+  "name": "猪八戒",
+  "email": "aadd123@21.cn",
+  "phone": "14533236677",
+  "address": "广州大道4号",
+  "sex": "1"
+}, {
+  "id": "10004",
+  "username": "user4",
+  "name": "猪八戒1",
+  "email": "aadd123@21.cn",
+  "phone": "14533236677",
+  "address": "广州大道5号",
+  "sex": "1"
+}]

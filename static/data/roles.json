@@ -1,0 +1,31 @@
+[{
+  "id": "10000",
+  "name": "超级管理员",
+  "roleTypeName": "其他",
+  "desc": "拥有系统的所有权限"
+}, {
+  "id": "10001",
+  "name": "角色1",
+  "roleTypeName": "功能角色",
+  "desc": "拥有XX模块的所有权限"
+}, {
+  "id": "10002",
+  "name": "角色2",
+  "roleTypeName": "功能角色",
+  "desc": "XX分公司项目管理权限"
+}, {
+  "id": "10003",
+  "name": "角色3",
+  "roleTypeName": "数据角色",
+  "desc": "用户管理员"
+}, {
+  "id": "10004",
+  "name": "角色4",
+  "roleTypeName": "数据角色",
+  "desc": "拥有XXX权限"
+}, {
+  "id": "10005",
+  "name": "角色5",
+  "roleTypeName": "普通角色",
+  "desc": "拥有XX权限"
+}]

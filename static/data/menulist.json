@@ -1,0 +1,116 @@
+[{
+  "id": "10000",
+  "name": "仪表盘",
+  "icon":"fa fa-tachometer",
+  "path": "/dashboard",
+  "pid": null,
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "一些统计信息"
+}, {
+  "id": "10001",
+  "name": "系统设置",
+  "icon": "fa fa-cogs",
+  "pid": null,
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "系统设置的相关功能"
+}, {
+  "id": "100011",
+  "name": "系统管理",
+  "icon": "fa fa-wrench",
+  "path": "/sysconfig",
+  "pid": "10001",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "系统包含的子系统的管理"
+}, {
+  "id": "100012",
+  "name": "模块管理",
+  "icon": "fa fa-th",
+  "path": "/mudule",
+  "pid": "10001",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "子系统的模块管理"
+}, {
+  "id": "100013",
+  "name": "资源管理",
+  "icon": "fa fa-area-chart",
+  "path": "/resource",
+  "pid": "10001",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "系统包含的url资源管理"
+}, {
+  "id": "100014",
+  "name": "菜单管理",
+  "icon": "fa fa-bars",
+  "path": "/menu",
+  "pid": "10001",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "系统包含的菜单的管理"
+}, {
+  "id": "100015",
+  "name": "组织机构管理",
+  "icon": "fa fa-building",
+  "path": "/org",
+  "pid": "10001",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "整套系统的组织架构"
+}, {
+  "id": "100016",
+  "name": "用户组管理",
+  "icon": "fa fa-users",
+  "path": "/group",
+  "pid": "10001",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "系统包含的用户组的管理"
+}, {
+  "id": "100017",
+  "name": "角色管理",
+  "icon": "fa fa-user-secret",
+  "path": "/role",
+  "pid": "10001",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "系统包含的角色管理"
+}, {
+  "id": "100018",
+  "name": "用户管理",
+  "icon": "fa fa-user",
+  "path": "/user",
+  "pid": "10001",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": "系统包含的用户管理"
+}, {
+  "id": "10002",
+  "name": "组件",
+  "icon": "fa fa-building",
+  "pid": null,
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": null
+}, {
+  "id": "100021",
+  "name": "数据表格",
+  "icon": "fa fa-table",
+  "path": "/components/table",
+  "pid": "10002",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": null
+}, {
+  "id": "100022",
+  "name": "圆圈图",
+  "icon": "fa fa-line-chart",
+  "path": "/components/charts",
+  "pid": "10002",
+  "sid": "10000",
+  "systemName": "基础系统",
+  "desc": null
+}]
