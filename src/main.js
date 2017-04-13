@@ -5,12 +5,15 @@ import App from './App'
 import router from './router'
 import iView from 'iview'
 import VueResource from 'vue-resource'
+import VueEcharts from 'vue-echarts/components/Echarts'
 import 'iview/dist/styles/iview.css'    // 使用 CSS
 
 Vue.config.productionTip = false
 
 Vue.use(iView)
 Vue.use(VueResource)
+
+Vue.component('charts', VueEcharts)
 
 /* eslint-disable no-new */
 new Vue({

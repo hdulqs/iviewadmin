@@ -1,13 +1,7 @@
 <template>
   <div class="layout-content">
     <div class="layout-content-main">
-      内容区域1111
-      内容区域1111
-      内容区域1111
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-      <div style="height: 1000px;">
-
-      </div>
+      一款用ivew2开发的前端admin原型
     </div>
   </div>
 </template>

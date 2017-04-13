@@ -12,14 +12,16 @@
         </div>
         <div class="layout-breadcrumb">
           <Breadcrumb>
-            <Breadcrumb-item href="#">首页</Breadcrumb-item>
-            <Breadcrumb-item href="#">应用中心</Breadcrumb-item>
-            <Breadcrumb-item>某应用</Breadcrumb-item>
+            <Breadcrumb-item>首页</Breadcrumb-item>
+            <Breadcrumb-item v-for="br in breadcrumbList" :key="br.id">
+              {{br.name}}
+            </Breadcrumb-item>
           </Breadcrumb>
         </div>
         <router-view></router-view>
         <div class="layout-copy">
-          2017-2018 &copy; 莫铭
+          2017-2018 &copy;
+          <a href="http://my.oschina.net/mobinchao" target="_blank">莫铭</a>
       </div>
       </i-col>
     </Row>
@@ -34,12 +36,39 @@ export default {
   data () {
     return {
       spanLeft: 4,
-      spanRight: 20
+      spanRight: 20,
+      menus: sessionStorage.getItem('system.menus') ? JSON.parse(sessionStorage.getItem('system.menus')) : []
     }
+  },
+  mounted: function mounted () {
   },
   computed: {
     iconSize () {
       return this.spanLeft === 4 ? 14 : 24
+    },
+    breadcrumbList () {
+      let routerArr = []
+      let cpath = this.$route.path
+      if (cpath !== '/' && cpath !== undefined) {
+        if (cpath === '/dashboard') {
+          routerArr.push({
+            id: 10000,
+            name: '仪表盘'
+          })
+        } else {
+          for (let i = 0; i < this.menus.length; i++) {
+            if (this.menus[i].subMenu) {
+              for (let j = 0; j < this.menus[i].subMenu.length; j++) {
+                if (this.menus[i].subMenu[j].path === cpath) {
+                  routerArr.push(this.menus[i])
+                  routerArr.push(this.menus[i].subMenu[j])
+                }
+              }
+            }
+          }
+        }
+      }
+      return routerArr
     }
   },
   methods: {
@@ -71,7 +100,7 @@ export default {
     padding: 10px 15px 0;
   }
   .layout-content{
-    min-height: calc(100% - 160px);
+    min-height: 568px;
     margin: 15px;
     overflow: hidden;
     background: #fff;
@@ -99,12 +128,17 @@ export default {
   .ivu-col{
     transition: width .2s ease-in-out;
   }
+  .layout-logo {
+    text-align: center;
+  }
   .layout-logo-left{
     width: 90%;
     height: 30px;
-    background: #9ea7b4;
+    background: #DBDBDB;
     border-radius: 3px;
     margin: 15px auto;
+    text-align: center;
+    font-size: 1.2em;
   }
   .layout-hide-text .layout-text{
     display: none;

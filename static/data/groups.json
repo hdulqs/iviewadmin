@@ -1,25 +1,25 @@
 [{
   "id": "10000",
   "name": "超级管理员组",
-  "desc": "拥有系统的所有角色"
+  "description": "拥有系统的所有角色"
 }, {
   "id": "10001",
   "name": "组别1",
-  "desc": "拥有XX角色"
+  "description": "拥有XX角色"
 }, {
   "id": "10002",
   "name": "组别2",
-  "desc": "拥有XX角色"
+  "description": "拥有XX角色"
 }, {
   "id": "10003",
   "name": "组别3",
-  "desc": "拥有XX角色"
+  "description": "拥有XX角色"
 }, {
   "id": "10004",
   "name": "组别4",
-  "desc": "拥有XX角色"
+  "description": "拥有XX角色"
 }, {
   "id": "10005",
   "name": "组别5",
-  "desc": "拥有XX角色"
+  "description": "拥有XX角色"
 }]
