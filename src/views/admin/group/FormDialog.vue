@@ -68,6 +68,27 @@ export default {
     }
   },
   methods: {
+    getInfo () {
+      this.$http.jsonp(sysApis.sys.group.get, {
+        params: {
+          id: this.initOption.id
+        }
+      }).then(response => {
+        if (response.body.success) {
+          this.groupForm = response.body.obj
+        } else {
+          this.$Modal.error({
+            title: '提示',
+            content: response.body.msg
+          })
+        }
+      }, response => {
+        this.$Modal.error({
+          title: '提示',
+          content: '网络不通！'
+        })
+      })
+    },
     handleSubmit () {
       this.$refs.groupForm.validate((valid) => {
         if (valid) {
@@ -77,7 +98,6 @@ export default {
           } else if (this.initOption.action === 'edit') {
             url = sysApis.sys.group.update
           }
-          console.log(this.groupForm)
           this.$http.jsonp(url, {
             params: this.groupForm
           }).then(response => {
@@ -86,6 +106,7 @@ export default {
                 title: '提示',
                 desc: '新分组保存成功！'
               })
+              this.$parent.$children[0].query()
               this.$parent.groupFormInitOption.showModal = false
               this.reset()
             } else {

@@ -36,7 +36,7 @@
       <Row type="flex" justify="center" class="pagination">
         <Col span="24">
           <Page
-            :current="pageIndex"
+            :current="pageNum"
             :page-size-opts="pageSizes"
             :page-size="pageSize"
             :total="total"
@@ -91,8 +91,8 @@ export default {
       loading: true,
       pageSizes: [10, 20, 30],
       pageSize: 10,
-      pageIndex: 1,
-      total: 4000
+      pageNum: 1,
+      total: 0
     }
   },
   mounted () {
@@ -107,13 +107,14 @@ export default {
       this.$http.jsonp(this.url, {
         params: this.params
       }).then((response) => {
-        this.tableData = response.body
+        this.tableData = response.body.obj.list
+        this.total = response.body.obj.total
         this.loading = false
       })
     },
     //
     query () {
-      this.pageIndex = 1
+      this.pageNum = 1
       this.loadData()
     },
     reset () {
@@ -125,8 +126,8 @@ export default {
       this.loadData()
     },
     // change current page
-    pageChange (pageIndex) {
-      this.pageIndex = pageIndex
+    pageChange (pageNum) {
+      this.pageNum = pageNum
       this.loadData()
     }
   },
@@ -134,7 +135,7 @@ export default {
     // dynamic pagination query params
     params: function () {
       let params = this.searchForm
-      params.pageIndex = this.pageIndex
+      params.pageNum = this.pageNum
       params.pageSize = this.pageSize
       return params
     },

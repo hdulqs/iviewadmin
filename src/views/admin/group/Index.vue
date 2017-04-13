@@ -38,9 +38,6 @@ export default {
         title: '描述',
         key: 'description'
       }, {
-        title: '创建时间',
-        key: 'createtime'
-      }, {
         title: '操作',
         key: 'action',
         render (row, column, index) {
@@ -77,7 +74,8 @@ export default {
       this.groupFormInitOption.title = '编辑分组'
       this.groupFormInitOption.action = 'edit'
       this.groupFormInitOption.showModal = true
-      this.groupForm.id = id
+      this.groupFormInitOption.id = id
+      this.$children[1].getInfo()
     },
     hanldeDelete (id, name) {
       this.$Modal.confirm({
@@ -94,6 +92,7 @@ export default {
                 title: '提示',
                 desc: '【' + name + '】删除成功！'
               })
+              this.$children[0].query()
             } else {
               this.$Notice.error({
                 title: '提示',
