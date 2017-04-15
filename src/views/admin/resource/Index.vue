@@ -1,39 +1,54 @@
 <template>
-  <div id="sysGroupIndex" class="layout-content">
+  <div id="sysResIndex" class="layout-content">
     <div class="layout-content-main">
       <DataTable
-        :url="sysApis.sys.group.find"
+        :url="sysApis.sys.resource.find"
         :columns="columns"
         :searchForm="searchForm">
         <template slot="function">
           <Button type="primary" @click="handleAdd">新增</Button>
         </template>
         <template slot="search">
-          <Form-item label="组名称" :label-width="60">
+          <Form-item label="资源名称" :label-width="60">
             <Input type="text" v-model="searchForm.name"></Input>
+          </Form-item>
+          <Form-item label="url" :label-width="30">
+            <Input type="text" v-model="searchForm.url"></Input>
           </Form-item>
         </template>
       </DataTable>
-      <FormDialog :initOption="groupFormInitOption"></FormDialog>
+      <FormDialog :initOption="resFormInitOption"></FormDialog>
     </div>
   </div>
 </template>
 <script>
 import DataTable from '@/components/DataTable'
-import FormDialog from '@/views/admin/group/FormDialog'
+import FormDialog from '@/views/admin/resource/FormDialog'
 import sysApis from '../../../apis'
 
 export default {
-  name: 'sysGroupIndex',
-  data: function data () {
+  name: 'sysResIndex',
+  data () {
     return {
       sysApis: sysApis,
       columns: [{
         title: 'ID',
         key: 'id'
       }, {
-        title: '组名称',
+        title: '资源名称',
         key: 'name'
+      }, {
+        title: '资源类型',
+        key: 'typeName'
+      }, {
+        title: '所属系统',
+        key: 'sname'
+      }, {
+        title: '所属模块',
+        key: 'mname'
+      }, {
+        title: 'url',
+        key: 'url'
       }, {
         title: '描述',
         key: 'description'
@@ -47,9 +62,10 @@ export default {
         }
       }],
       searchForm: {
-        name: ''
+        name: '',
+        url: ''
       },
-      groupFormInitOption: {
+      resFormInitOption: {
         title: '',
         action: '',
         showModal: false,
@@ -59,30 +75,30 @@ export default {
   },
   methods: {
     handleAdd () {
-      this.groupFormInitOption.title = '新增分组'
-      this.groupFormInitOption.action = 'add'
-      this.groupFormInitOption.showModal = true
+      this.resFormInitOption.title = '新增资源'
+      this.resFormInitOption.action = 'add'
+      this.resFormInitOption.showModal = true
     },
     handleView (id) {
       this.$Modal.info({
-        title: '分组信息',
+        title: '资源信息',
         content: '1111',
         scrollable: true
       })
     },
     handleEdit (id) {
-      this.groupFormInitOption.title = '编辑分组'
-      this.groupFormInitOption.action = 'edit'
-      this.groupFormInitOption.showModal = true
-      this.groupFormInitOption.id = id
+      this.resFormInitOption.title = '编辑资源'
+      this.resFormInitOption.action = 'edit'
+      this.resFormInitOption.showModal = true
+      this.resFormInitOption.id = id
       this.$children[1].getInfo()
     },
     hanldeDelete (id, name) {
       this.$Modal.confirm({
         title: '请确认',
-        content: '确定删除【' + name + '】分组？',
+        content: '确定删除【' + name + '】资源？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.group.delete, {
+          this.$http.jsonp(sysApis.sys.resource.delete, {
             params: {
               id: id
             }
@@ -110,6 +126,7 @@ export default {
     },
     resetTableSearchForm () {
       this.searchForm.name = ''
+      this.searchForm.url = ''
     }
   },
   components: {

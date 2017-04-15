@@ -57,10 +57,5 @@
     "name": "数据表格",
     "icon": "drag",
     "path": "/components/table"
-  }, {
-    "id": "100022",
-    "name": "圆圈图",
-    "icon": "ios-circle-outline",
-    "path": "/components/charts"
   }]
 }]

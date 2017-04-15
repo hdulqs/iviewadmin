@@ -1,5 +1,6 @@
 <template>
   <Menu
+    id="sysMenu"
     :class="{'layout-hide-text': spanLeft < 4}"
     :active-name="activeMenu"
     theme="light"
@@ -52,7 +53,7 @@ export default {
       menuList: []
     }
   },
-  name: 'appMenu',
+  name: 'sysMenu',
   mounted () {
     this.$nextTick(() => {
       this.getMenus()

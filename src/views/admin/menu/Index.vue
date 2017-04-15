@@ -1,38 +1,38 @@
 <template>
-  <div id="sysGroupIndex" class="layout-content">
+  <div id="sysMenuIndex" class="layout-content">
     <div class="layout-content-main">
       <DataTable
-        :url="sysApis.sys.group.find"
+        :url="sysApis.sys.menu.find"
         :columns="columns"
         :searchForm="searchForm">
         <template slot="function">
           <Button type="primary" @click="handleAdd">新增</Button>
         </template>
         <template slot="search">
-          <Form-item label="组名称" :label-width="60">
+          <Form-item label="菜单名称" :label-width="60">
             <Input type="text" v-model="searchForm.name"></Input>
           </Form-item>
         </template>
       </DataTable>
-      <FormDialog :initOption="groupFormInitOption"></FormDialog>
+      <FormDialog :initOption="menuFormInitOption"></FormDialog>
     </div>
   </div>
 </template>
 <script>
 import DataTable from '@/components/DataTable'
-import FormDialog from '@/views/admin/group/FormDialog'
+import FormDialog from '@/views/admin/menu/FormDialog'
 import sysApis from '../../../apis'
 
 export default {
-  name: 'sysGroupIndex',
-  data: function data () {
+  name: 'sysMenuIndex',
+  data () {
     return {
       sysApis: sysApis,
       columns: [{
         title: 'ID',
         key: 'id'
       }, {
-        title: '组名称',
+        title: '菜单名称',
         key: 'name'
       }, {
         title: '描述',
@@ -47,9 +47,10 @@ export default {
         }
       }],
       searchForm: {
-        name: ''
+        name: '',
+        url: ''
       },
-      groupFormInitOption: {
+      menuFormInitOption: {
         title: '',
         action: '',
         showModal: false,
@@ -59,30 +60,30 @@ export default {
   },
   methods: {
     handleAdd () {
-      this.groupFormInitOption.title = '新增分组'
-      this.groupFormInitOption.action = 'add'
-      this.groupFormInitOption.showModal = true
+      this.menuFormInitOption.title = '新增菜单'
+      this.menuFormInitOption.action = 'add'
+      this.menuFormInitOption.showModal = true
     },
     handleView (id) {
       this.$Modal.info({
-        title: '分组信息',
+        title: '菜单信息',
         content: '1111',
         scrollable: true
       })
     },
     handleEdit (id) {
-      this.groupFormInitOption.title = '编辑分组'
-      this.groupFormInitOption.action = 'edit'
-      this.groupFormInitOption.showModal = true
-      this.groupFormInitOption.id = id
+      this.menuFormInitOption.title = '编辑菜单'
+      this.menuFormInitOption.action = 'edit'
+      this.menuFormInitOption.showModal = true
+      this.menuFormInitOption.id = id
       this.$children[1].getInfo()
     },
     hanldeDelete (id, name) {
       this.$Modal.confirm({
         title: '请确认',
-        content: '确定删除【' + name + '】分组？',
+        content: '确定删除【' + name + '】菜单？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.group.delete, {
+          this.$http.jsonp(sysApis.sys.menu.delete, {
             params: {
               id: id
             }
@@ -110,6 +111,7 @@ export default {
     },
     resetTableSearchForm () {
       this.searchForm.name = ''
+      this.searchForm.url = ''
     }
   },
   components: {

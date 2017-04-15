@@ -100,11 +100,11 @@ export default {
     padding: 10px 15px 0;
   }
   .layout-content{
-    min-height: 568px;
     margin: 15px;
     overflow: hidden;
     background: #fff;
     border-radius: 4px;
+    min-height: calc(100% - 167px);
   }
   .layout-content-main{
     padding: 10px;
@@ -113,6 +113,7 @@ export default {
     text-align: center;
     padding: 10px 0 20px;
     color: #9ea7b4;
+    height: 50px;
   }
   .layout-menu-left{
     background: #fff;

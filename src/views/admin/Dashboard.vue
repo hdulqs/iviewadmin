@@ -1,5 +1,5 @@
 <template>
-  <div id="appDashboard">
+  <div id="sysDashboard">
     <div class="layout-content">
       <div class="layout-content-main">
         <Row type="flex" justify="center">
@@ -44,7 +44,7 @@
 import 'echarts/theme/default'
 
 export default {
-  name: 'appDashboard',
+  name: 'sysDashboard',
   data: function data () {
     return {
       msg: 'dashboard',

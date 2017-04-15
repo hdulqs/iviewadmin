@@ -3,66 +3,66 @@ let root = 'http://localhost:8888'
 let sysApis = {
   sys: {
     dashboard: {
-      sellStatistic: root + '/dashboard/sellStatistic',
-      sellTarget: root + '/dashboard/sellTarget',
-      xboxInStock: root + '/dashboard/xboxInStock',
-      ps4InStock: root + '/dashboard/ps4InStock'
+      sellStatistic: root + '/sys/dashboard/sellStatistic',
+      sellTarget: root + '/sys/dashboard/sellTarget',
+      xboxInStock: root + '/sys/dashboard/xboxInStock',
+      ps4InStock: root + '/sys/dashboard/ps4InStock'
     },
     system: {
-      save: root + '/system/save',
-      update: root + '/system/update',
-      delete: root + '/system/delete',
-      get: root + '/system/get',
-      find: root + '/system/find'
+      save: root + '/sys/system/save',
+      update: root + '/sys/system/update',
+      delete: root + '/sys/system/delete',
+      get: root + '/sys/system/get',
+      find: root + '/sys/system/find'
     },
     module: {
-      save: root + '/module/save',
-      update: root + '/module/update',
-      delete: root + '/module/delete',
-      get: root + '/module/get',
-      find: root + '/module/find'
+      save: root + '/sys/module/save',
+      update: root + '/sys/module/update',
+      delete: root + '/sys/module/delete',
+      get: root + '/sys/module/get',
+      find: root + '/sys/module/find'
     },
     resource: {
-      save: root + '/resource/save',
-      update: root + '/resource/update',
-      delete: root + '/resource/delete',
-      get: root + '/resource/get',
-      find: root + '/resource/find'
+      save: root + '/sys/resource/save',
+      update: root + '/sys/resource/update',
+      delete: root + '/sys/resource/delete',
+      get: root + '/sys/resource/get',
+      find: root + '/sys/resource/find'
     },
     menu: {
-      save: root + '/menu/save',
-      update: root + '/menu/update',
-      delete: root + '/menu/delete',
-      get: root + '/menu/get',
-      find: root + '/menu/find'
+      save: root + '/sys/menu/save',
+      update: root + '/sys/menu/update',
+      delete: root + '/sys/menu/delete',
+      get: root + '/sys/menu/get',
+      find: root + '/sys/menu/find'
     },
     org: {
-      save: root + '/org/save',
-      update: root + '/org/update',
-      delete: root + '/org/delete',
-      get: root + '/org/get',
-      find: root + '/org/find'
+      save: root + '/sys/org/save',
+      update: root + '/sys/org/update',
+      delete: root + '/sys/org/delete',
+      get: root + '/sys/org/get',
+      find: root + '/sys/org/find'
     },
     group: {
-      save: root + '/group/save',
-      update: root + '/group/update',
-      delete: root + '/group/delete',
-      get: root + '/group/get',
-      find: root + '/group/find'
+      save: root + '/sys/group/save',
+      update: root + '/sys/group/update',
+      delete: root + '/sys/group/delete',
+      get: root + '/sys/group/get',
+      find: root + '/sys/group/find'
     },
     role: {
-      save: root + '/role/save',
-      update: root + '/role/update',
-      delete: root + '/role/delete',
-      get: root + '/role/get',
-      find: root + '/role/find'
+      save: root + '/sys/role/save',
+      update: root + '/sys/role/update',
+      delete: root + '/sys/role/delete',
+      get: root + '/sys/role/get',
+      find: root + '/sys/role/find'
     },
     user: {
-      save: root + '/user/save',
-      update: root + '/user/update',
-      delete: root + '/user/delete',
-      get: root + '/user/get',
-      find: root + '/user/find'
+      save: root + '/sys/user/save',
+      update: root + '/sys/user/update',
+      delete: root + '/sys/user/delete',
+      get: root + '/sys/user/get',
+      find: root + '/sys/user/find'
     }
   }
 }
