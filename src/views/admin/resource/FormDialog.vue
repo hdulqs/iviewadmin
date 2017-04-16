@@ -2,7 +2,8 @@
   <Modal
     id="sysResFormDialog"
     v-model="initOption.showModal"
-    :mask-closable="false">
+    :mask-closable="false"
+    @on-cancel="reset">
     <p slot="header" style="color:#f60;text-align:center;">
       <Icon type="information-circled"></Icon>
       <span>{{initOption.title}}</span>
@@ -98,19 +99,19 @@ export default {
     return {
       formRules: {
         name: [
-          {required: true, message: '资源名称不能为空', trigger: 'blur'}
+          {required: true, type: 'string', message: '资源名称不能为空', trigger: 'blur'}
         ],
-        // type: [
-        //   {required: true, message: '请选择资源类型', trigger: 'change'}
-        // ],
-        // sid: [
-        //   {required: true, message: '请选择所属系统', trigger: 'change'}
-        // ],
-        // mid: [
-        //   {required: true, message: '请选择所属模块', trigger: 'change'}
-        // ],
+        type: [
+          {required: true, type: 'string', message: '请选择资源类型', trigger: 'change'}
+        ],
+        sid: [
+          {required: true, type: 'string', message: '请选择所属系统', trigger: 'change'}
+        ],
+        mid: [
+          {required: true, type: 'string', message: '请选择所属模块', trigger: 'change'}
+        ],
         url: [
-          {required: true, message: 'url必填', trigger: 'blur'}
+          {required: true, type: 'string', message: 'url必填', trigger: 'blur'}
         ]
       },
       resForm: {

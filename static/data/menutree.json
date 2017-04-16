@@ -11,12 +11,12 @@
     "id": "100011",
     "name": "系统管理",
     "icon": "hammer",
-    "path": "/sys/sysconfig"
+    "path": "/sys/system"
   }, {
     "id": "100012",
     "name": "模块管理",
     "icon": "navicon-round",
-    "path": "/sys/mudule"
+    "path": "/sys/module"
   }, {
     "id": "100013",
     "name": "资源管理",
