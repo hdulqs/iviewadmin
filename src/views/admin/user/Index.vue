@@ -60,9 +60,10 @@ export default {
   },
   methods: {
     handleAdd () {
-      this.userFormInitOption.title = '新增资源'
+      this.userFormInitOption.title = '新增用户'
       this.userFormInitOption.action = 'add'
       this.userFormInitOption.showModal = true
+      this.$children[1].reset()
     },
     handleView (id) {
       this.$Modal.info({

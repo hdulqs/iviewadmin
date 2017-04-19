@@ -18,8 +18,14 @@
       <Form-item label="用户名" prop="username">
         <Input type="text" v-model="userForm.username" placeholder="请输入用户名"></Input>
       </Form-item>
-      <Form-item label="密码" prop="password">
+      <Form-item label="密码" prop="password" v-if="initOption.action === 'add'">
         <Input type="password" v-model="userForm.password" placeholder="请输入密码"></Input>
+      </Form-item>
+      <Form-item label="昵称" prop="name">
+        <Input type="text" v-model="userForm.name" placeholder="请输入用户昵称"></Input>
+      </Form-item>
+      <Form-item label="Email" prop="email">
+        <Input type="text" v-model="userForm.email" placeholder="请输入email"></Input>
       </Form-item>
     </Form>
     <div slot="footer">
@@ -54,17 +60,25 @@ export default {
   data () {
     return {
       formRules: {
-        name: [
-          {required: true, message: '用户名不能为空', trigger: 'blur'}
+        username: [
+          {required: true, message: '用户名不能为空！', trigger: 'blur'}
         ],
-        type: [
-          {required: true, message: '请选择资源类型', trigger: 'blur'}
+        password: [
+          {required: true, message: '密码不能为空！', trigger: 'blur'}
+        ],
+        name: [
+          {required: true, message: '昵称不能为空！', trigger: 'blur'}
+        ],
+        email: [
+          {type: 'email', message: '邮箱地址格式不正确！', trigger: 'blur'}
         ]
       },
       userForm: {
         id: this.initOption.id,
         username: '',
-        password: ''
+        password: '',
+        name: '',
+        email: ''
       }
     }
   },

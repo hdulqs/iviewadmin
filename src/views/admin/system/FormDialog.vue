@@ -109,7 +109,6 @@ export default {
               })
               this.$parent.$children[0].query()
               this.$parent.sysFormInitOption.showModal = false
-              this.reset()
             } else {
               this.$Notice.error({
                 title: '提示',
