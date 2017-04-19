@@ -60,19 +60,19 @@ export default {
   },
   methods: {
     handleAdd () {
-      this.sysFormInitOption.title = '新增资源'
+      this.sysFormInitOption.title = '新增系统'
       this.sysFormInitOption.action = 'add'
       this.sysFormInitOption.showModal = true
     },
     handleView (id) {
       this.$Modal.info({
-        title: '资源信息',
+        title: '系统信息',
         content: '1111',
         scrollable: true
       })
     },
     handleEdit (id) {
-      this.sysFormInitOption.title = '编辑资源'
+      this.sysFormInitOption.title = '编辑系统'
       this.sysFormInitOption.action = 'edit'
       this.sysFormInitOption.showModal = true
       this.sysFormInitOption.id = id

@@ -11,6 +11,7 @@ import ModuleIndex from '@/views/admin/module/Index'
 import OrgIndex from '@/views/admin/org/Index'
 import RoleIndex from '@/views/admin/role/Index'
 import UserIndex from '@/views/admin/user/Index'
+import SyslogIndex from '@/views/admin/syslog/Index'
 import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -66,6 +67,11 @@ export default new Router({
       path: '/sys/user',
       name: 'sys.user.index',
       component: UserIndex
+    },
+    {
+      path: '/sys/syslog',
+      name: 'sys.syslog.index',
+      component: SyslogIndex
     },
     {
       path: '*',

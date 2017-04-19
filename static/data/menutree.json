@@ -47,6 +47,11 @@
     "name": "用户管理",
     "icon": "ios-body",
     "path": "/sys/user"
+  }, {
+    "id": "100019",
+    "name": "系统日志",
+    "icon": "home",
+    "path": "/sys/syslog"
   }]
 }, {
   "id": "10002",

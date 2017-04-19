@@ -1,5 +1,5 @@
 
-let root = 'http://localhost:8888'
+let root = 'http://127.0.0.1:8888'
 let sysApis = {
   sys: {
     dashboard: {
@@ -63,6 +63,9 @@ let sysApis = {
       delete: root + '/sys/user/delete',
       get: root + '/sys/user/get',
       find: root + '/sys/user/find'
+    },
+    syslog: {
+      find: root + '/sys/syslog/find'
     }
   }
 }

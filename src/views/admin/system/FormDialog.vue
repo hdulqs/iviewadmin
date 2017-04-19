@@ -40,7 +40,7 @@ export default {
     initOption: {
       title: {
         type: String,
-        default: '新增资源'
+        default: '新增系统'
       },
       action: {
         type: String,
@@ -105,7 +105,7 @@ export default {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',
-                desc: '新菜单保存成功！'
+                desc: response.body.msg
               })
               this.$parent.$children[0].query()
               this.$parent.sysFormInitOption.showModal = false
