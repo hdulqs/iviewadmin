@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import AppMenu from '@/components/Menu'
+import AppMenu from '@/components/Menu';
 
 export default {
   name: 'app',
@@ -38,54 +38,54 @@ export default {
       spanLeft: 4,
       spanRight: 20,
       menus: sessionStorage.getItem('system.menus') ? JSON.parse(sessionStorage.getItem('system.menus')) : []
-    }
+    };
   },
   mounted: function mounted () {
   },
   computed: {
     iconSize () {
-      return this.spanLeft === 4 ? 14 : 24
+      return this.spanLeft === 4 ? 14 : 24;
     },
     breadcrumbList () {
-      let routerArr = []
-      let cpath = this.$route.path
+      let routerArr = [];
+      let cpath = this.$route.path;
       if (cpath !== '/' && cpath !== undefined) {
         if (cpath === '/dashboard') {
           routerArr.push({
             id: 10000,
             name: '仪表盘'
-          })
+          });
         } else {
           for (let i = 0; i < this.menus.length; i++) {
             if (this.menus[i].subMenu) {
               for (let j = 0; j < this.menus[i].subMenu.length; j++) {
                 if (this.menus[i].subMenu[j].path === cpath) {
-                  routerArr.push(this.menus[i])
-                  routerArr.push(this.menus[i].subMenu[j])
+                  routerArr.push(this.menus[i]);
+                  routerArr.push(this.menus[i].subMenu[j]);
                 }
               }
             }
           }
         }
       }
-      return routerArr
+      return routerArr;
     }
   },
   methods: {
     toggleClick () {
       if (this.spanLeft === 4) {
-        this.spanLeft = 2
-        this.spanRight = 22
+        this.spanLeft = 2;
+        this.spanRight = 22;
       } else {
-        this.spanLeft = 4
-        this.spanRight = 20
+        this.spanLeft = 4;
+        this.spanRight = 20;
       }
     }
   },
   components: {
     AppMenu
   }
-}
+};
 </script>
 
 <style>

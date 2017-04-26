@@ -9,7 +9,7 @@
           <Button type="primary" @click="handleAdd">新增</Button>
         </template>
         <template slot="search">
-          <Form-item label="系统名称" :label-width="60">
+          <Form-item label="系统名称" :label-width="60" prop="name">
             <Input type="text" v-model="searchForm.name"></Input>
           </Form-item>
         </template>
@@ -19,9 +19,9 @@
   </div>
 </template>
 <script>
-import DataTable from '@/components/DataTable'
-import FormDialog from '@/views/admin/system/FormDialog'
-import sysApis from '../../../apis'
+import DataTable from '@/components/DataTable';
+import FormDialog from '@/views/admin/system/FormDialog';
+import sysApis from '../../../apis';
 
 export default {
   name: 'sysSystemIndex',
@@ -43,12 +43,11 @@ export default {
         render (row, column, index) {
           return `<i-button type="primary" size="small" @click="handleView('${row.id}')">查看</i-button>
           <i-button type="warning" size="small" @click="handleEdit('${row.id}')">编辑</i-button>
-          <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')">删除</i-button>`
+          <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')">删除</i-button>`;
         }
       }],
       searchForm: {
-        name: '',
-        url: ''
+        name: ''
       },
       sysFormInitOption: {
         title: '',
@@ -56,27 +55,28 @@ export default {
         showModal: false,
         id: ''
       }
-    }
+    };
   },
   methods: {
     handleAdd () {
-      this.sysFormInitOption.title = '新增系统'
-      this.sysFormInitOption.action = 'add'
-      this.sysFormInitOption.showModal = true
+      this.sysFormInitOption.title = '新增系统';
+      this.sysFormInitOption.action = 'add';
+      this.sysFormInitOption.showModal = true;
+      this.$children[1].reset();
     },
     handleView (id) {
       this.$Modal.info({
         title: '系统信息',
         content: '1111',
         scrollable: true
-      })
+      });
     },
     handleEdit (id) {
-      this.sysFormInitOption.title = '编辑系统'
-      this.sysFormInitOption.action = 'edit'
-      this.sysFormInitOption.showModal = true
-      this.sysFormInitOption.id = id
-      this.$children[1].getInfo()
+      this.sysFormInitOption.title = '编辑系统';
+      this.sysFormInitOption.action = 'edit';
+      this.sysFormInitOption.showModal = true;
+      this.sysFormInitOption.id = id;
+      this.$children[1].getInfo();
     },
     hanldeDelete (id, name) {
       this.$Modal.confirm({
@@ -92,32 +92,29 @@ export default {
               this.$Notice.success({
                 title: '提示',
                 desc: '【' + name + '】删除成功！'
-              })
-              this.$children[0].query()
+              });
+              this.$children[0].query();
             } else {
               this.$Notice.error({
                 title: '提示',
                 desc: response.body.msg
-              })
+              });
             }
           }, response => {
             this.$Notice.error({
               title: '提示',
               desc: '网络连接失败，请稍后再试！'
-            })
-          })
+            });
+          });
         }
-      })
-    },
-    resetTableSearchForm () {
-      this.searchForm.name = ''
+      });
     }
   },
   components: {
     DataTable,
     FormDialog
   }
-}
+};
 </script>
 <style>
 </style>

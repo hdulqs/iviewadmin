@@ -26,7 +26,7 @@
   </Modal>
 </template>
 <script>
-import sysApis from '../../../apis'
+import sysApis from '../../../apis';
 
 export default {
   name: 'sysOrgFormDialog',
@@ -65,7 +65,7 @@ export default {
         privilegess: '1',
         description: ''
       }
-    }
+    };
   },
   methods: {
     getInfo () {
@@ -75,28 +75,28 @@ export default {
         }
       }).then(response => {
         if (response.body.success) {
-          this.orgForm = response.body.obj
+          this.orgForm = response.body.obj;
         } else {
           this.$Modal.error({
             title: '提示',
             content: response.body.msg
-          })
+          });
         }
       }, response => {
         this.$Modal.error({
           title: '提示',
           content: '网络不通！'
-        })
-      })
+        });
+      });
     },
     handleSubmit () {
       this.$refs.orgForm.validate((valid) => {
         if (valid) {
-          let url
+          let url;
           if (this.initOption.action === 'add') {
-            url = sysApis.sys.org.save
+            url = sysApis.sys.org.save;
           } else if (this.initOption.action === 'edit') {
-            url = sysApis.sys.org.update
+            url = sysApis.sys.org.update;
           }
           this.$http.jsonp(url, {
             params: this.orgForm
@@ -105,30 +105,30 @@ export default {
               this.$Notice.success({
                 title: '提示',
                 desc: '新菜单保存成功！'
-              })
-              this.$parent.$children[0].query()
-              this.$parent.orgFormInitOption.showModal = false
-              this.reset()
+              });
+              this.$parent.$children[0].query();
+              this.$parent.orgFormInitOption.showModal = false;
+              this.reset();
             } else {
               this.$Notice.error({
                 title: '提示',
                 desc: response.body.msg
-              })
+              });
             }
           }, response => {
             this.$Notice.error({
               title: '提示',
               desc: '网络异常，请稍后再试！'
-            })
-          })
+            });
+          });
         }
-      })
+      });
     },
     reset () {
-      this.$refs.orgForm.resetFields()
+      this.$refs.orgForm.resetFields();
     }
   }
-}
+};
 </script>
 <style>
 </style>

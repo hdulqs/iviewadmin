@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import 'echarts/theme/default'
+import 'echarts/theme/default';
 
 export default {
   name: 'sysDashboard',
@@ -83,29 +83,29 @@ export default {
           data: [260, 660, 220, 440, 880, 180, 580]
         }]
       }
-    }
+    };
   },
   methods: {
     calcColor: function calcColor (percent) {
       if (percent < 10) {
-        return '#EE0000'
+        return '#EE0000';
       } else if (percent < 20) {
-        return '#EE5C42'
+        return '#EE5C42';
       } else if (percent < 40) {
-        return '#EEB4B4'
+        return '#EEB4B4';
       } else if (percent < 60) {
-        return '#C1FFC1'
+        return '#C1FFC1';
       } else if (percent < 70) {
-        return '#ADFF2F'
+        return '#ADFF2F';
       } else if (percent < 80) {
-        return '#7CFC00'
+        return '#7CFC00';
       } else if (percent < 90) {
-        return '#00EE00'
+        return '#00EE00';
       }
-      return '#00FF00'
+      return '#00FF00';
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .sell-charts {

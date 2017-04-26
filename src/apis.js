@@ -1,5 +1,5 @@
 
-let root = 'http://127.0.0.1:8888'
+let root = 'http://127.0.0.1:8888';
 let sysApis = {
   sys: {
     dashboard: {
@@ -34,7 +34,8 @@ let sysApis = {
       update: root + '/sys/menu/update',
       delete: root + '/sys/menu/delete',
       get: root + '/sys/menu/get',
-      find: root + '/sys/menu/find'
+      find: root + '/sys/menu/find',
+      tree: root + '/sys/menu/tree'
     },
     org: {
       save: root + '/sys/org/save',
@@ -58,16 +59,17 @@ let sysApis = {
       find: root + '/sys/role/find'
     },
     user: {
-      save: root + '/sys/user/save',
+      save: root + '/sys/user/register',
       update: root + '/sys/user/update',
       delete: root + '/sys/user/delete',
       get: root + '/sys/user/get',
       find: root + '/sys/user/find'
     },
     syslog: {
-      find: root + '/sys/syslog/find'
+      find: root + '/sys/syslog/find',
+      get: root + '/sys/syslog/get'
     }
   }
-}
+};
 
-export default sysApis
+export default sysApis;

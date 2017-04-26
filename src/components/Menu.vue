@@ -8,18 +8,21 @@
     @on-select="handleSelect"
     accordion>
     <div class="layout-logo-left">
-      <router-link to="/">iviewadmin</router-link>
+      <router-link to="/">
+        <span v-if="spanLeft >= 4">IVA后台管理系统</span>
+        <span v-if="spanLeft < 4">IVA</span>
+      </router-link>
     </div>
     <template v-for="(menu, index) in menuList">
 
       <Menu-item
-        v-if="!menu.subMenu"
+        v-if="menu.subMenu === null || menu.subMenu === undefined || menu.subMenu.length === 0"
         :name="menu.path">
           <Icon :type="menu.icon" :size="iconSize"></Icon>
           <span class="layout-text">{{menu.name}}</span>
       </Menu-item>
 
-      <Submenu :name="index + 1"  v-if="menu.subMenu">
+      <Submenu :name="index + 1"  v-if="menu.subMenu.length > 0">
         <template slot="title">
           <Icon :type="menu.icon" :size="iconSize"></Icon>
           <span class="layout-text">{{menu.name}}</span>
@@ -37,6 +40,8 @@
   </Menu>
 </template>
 <script>
+import sysApis from '../apis';
+
 export default {
   props: {
     iconSize: {
@@ -46,37 +51,49 @@ export default {
     spanLeft: {
       required: true,
       type: Number
+    },
+    sid: {
+      type: String,
+      default: 'f043a1edddc5477bbf82cd3261778cd5'
     }
   },
   data () {
     return {
       menuList: []
-    }
+    };
   },
   name: 'sysMenu',
   mounted () {
     this.$nextTick(() => {
-      this.getMenus()
-    })
+      this.getMenus();
+    });
   },
   computed: {
     activeMenu () {
-      return this.$route.path
+      return this.$route.path;
     }
   },
   methods: {
     getMenus () {
-      this.$http.get('static/data/menutree.json')
-        .then(response => {
-          this.menuList = response.body
-          sessionStorage.setItem('system.menus', JSON.stringify(response.body))
-        })
+      this.$http.jsonp(sysApis.sys.menu.tree, {
+        params: {
+          sid: this.sid
+        }
+      }).then(response => {
+        this.menuList = response.body.obj;
+        sessionStorage.setItem('system.menus', JSON.stringify(response.body.obj));
+      }, response => {
+        this.$Modal.error({
+          title: '提示',
+          content: response.body.msg
+        });
+      });
     },
     handleSelect (name) {
-      this.$router.push(name)
+      this.$router.push(name);
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .ivu-menu-item-selected {

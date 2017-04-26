@@ -32,7 +32,7 @@
   </Modal>
 </template>
 <script>
-import sysApis from '../../../apis'
+import sysApis from '../../../apis';
 
 export default {
   name: 'sysGroupFormDialog',
@@ -66,7 +66,7 @@ export default {
         name: '',
         description: ''
       }
-    }
+    };
   },
   methods: {
     getInfo () {
@@ -76,28 +76,28 @@ export default {
         }
       }).then(response => {
         if (response.body.success) {
-          this.groupForm = response.body.obj
+          this.groupForm = response.body.obj;
         } else {
           this.$Modal.error({
             title: '提示',
             content: response.body.msg
-          })
+          });
         }
       }, response => {
         this.$Modal.error({
           title: '提示',
           content: '网络不通！'
-        })
-      })
+        });
+      });
     },
     handleSubmit () {
       this.$refs.groupForm.validate((valid) => {
         if (valid) {
-          let url
+          let url;
           if (this.initOption.action === 'add') {
-            url = sysApis.sys.group.save
+            url = sysApis.sys.group.save;
           } else if (this.initOption.action === 'edit') {
-            url = sysApis.sys.group.update
+            url = sysApis.sys.group.update;
           }
           this.$http.jsonp(url, {
             params: this.groupForm
@@ -106,30 +106,30 @@ export default {
               this.$Notice.success({
                 title: '提示',
                 desc: '新分组保存成功！'
-              })
-              this.$parent.$children[0].query()
-              this.$parent.groupFormInitOption.showModal = false
-              this.reset()
+              });
+              this.$parent.$children[0].query();
+              this.$parent.groupFormInitOption.showModal = false;
+              this.reset();
             } else {
               this.$Notice.error({
                 title: '提示',
                 desc: response.body.msg
-              })
+              });
             }
           }, response => {
             this.$Notice.error({
               title: '提示',
               desc: '网络异常，请稍后再试！'
-            })
-          })
+            });
+          });
         }
-      })
+      });
     },
     reset () {
-      this.$refs.groupForm.resetFields()
+      this.$refs.groupForm.resetFields();
     }
   }
-}
+};
 </script>
 <style>
 </style>

@@ -32,7 +32,7 @@
   </Modal>
 </template>
 <script>
-import sysApis from '../../../apis'
+import sysApis from '../../../apis';
 
 export default {
   name: 'sysRoleFormDialog',
@@ -66,7 +66,7 @@ export default {
         name: '',
         description: ''
       }
-    }
+    };
   },
   methods: {
     getInfo () {
@@ -76,28 +76,28 @@ export default {
         }
       }).then(response => {
         if (response.body.success) {
-          this.roleForm = response.body.obj
+          this.roleForm = response.body.obj;
         } else {
           this.$Modal.error({
             title: '提示',
             content: response.body.msg
-          })
+          });
         }
       }, response => {
         this.$Modal.error({
           title: '提示',
           content: '网络不通！'
-        })
-      })
+        });
+      });
     },
     handleSubmit () {
       this.$refs.roleForm.validate((valid) => {
         if (valid) {
-          let url
+          let url;
           if (this.initOption.action === 'add') {
-            url = sysApis.sys.role.save
+            url = sysApis.sys.role.save;
           } else if (this.initOption.action === 'edit') {
-            url = sysApis.sys.role.update
+            url = sysApis.sys.role.update;
           }
           this.$http.jsonp(url, {
             params: this.roleForm
@@ -106,30 +106,30 @@ export default {
               this.$Notice.success({
                 title: '提示',
                 desc: '新角色保存成功！'
-              })
-              this.$parent.$children[0].query()
-              this.$parent.roleFormInitOption.showModal = false
-              this.reset()
+              });
+              this.$parent.$children[0].query();
+              this.$parent.roleFormInitOption.showModal = false;
+              this.reset();
             } else {
               this.$Notice.error({
                 title: '提示',
                 desc: response.body.msg
-              })
+              });
             }
           }, response => {
             this.$Notice.error({
               title: '提示',
               desc: '网络异常，请稍后再试！'
-            })
-          })
+            });
+          });
         }
-      })
+      });
     },
     reset () {
-      this.$refs.roleForm.resetFields()
+      this.$refs.roleForm.resetFields();
     }
   }
-}
+};
 </script>
 <style>
 </style>

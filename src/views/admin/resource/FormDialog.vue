@@ -29,26 +29,10 @@
         </Select>
       </Form-item>
       <Form-item label="所属系统" prop="sid">
-        <Select v-model="resForm.sid" clearable filterable>
-          <Option
-            :value="sys.id"
-            :label="sys.name"
-            v-for="sys in systemList" :key="sys.id">
-            <span>{{sys.name}}</span>
-            <span style="float:right;color:#ccc">{{sys.description}}</span>
-          </Option>
-        </Select>
+        <SystemCombo v-model="resForm.sid"></SystemCombo>
       </Form-item>
       <Form-item label="所属模块" prop="mid">
-        <Select v-model="resForm.mid" clearable filterable>
-          <Option
-            :value="m.id"
-            :label="m.name"
-            v-for="m in moduleList" :key="m.id">
-            <span>{{m.name}}</span>
-            <span style="float:right;color:#ccc">{{m.description}}</span>
-          </Option>
-        </Select>
+        <ModuleCombo v-model="resForm.mid" :sid="resForm.sid"></ModuleCombo>
       </Form-item>
       <Form-item label="url" prop="url">
         <Input type="text" v-model="resForm.url" ></Input>
@@ -73,7 +57,9 @@
   </Modal>
 </template>
 <script>
-import sysApis from '../../../apis'
+import SystemCombo from '@/components/SystemCombo';
+import ModuleCombo from '@/components/ModuleCombo';
+import sysApis from '../../../apis';
 
 export default {
   name: 'sysResFormDialog',
@@ -117,55 +103,21 @@ export default {
       resForm: {
         id: this.initOption.id,
         name: '',
-        type: null,
-        sid: null,
-        mid: null,
+        type: '0',
+        sid: '',
+        mid: '',
         url: '',
         privilegess: '1',
         description: ''
       },
       resourceTypes: [{
-        id: 0,
+        id: '0',
         name: '功能资源'
       }, {
-        id: 1,
+        id: '1',
         name: '菜单资源'
-      }],
-      systemList: [{
-        id: 10000,
-        name: '基础系统',
-        description: '包含系统基础功能'
-      }],
-      moduleList: [{
-        id: 10000,
-        name: '系统管理',
-        description: '管理本系统包含的子系统'
-      }, {
-        id: 10001,
-        name: '模块管理',
-        description: '管理子系统包含的模块'
-      }, {
-        id: 10002,
-        name: '资源管理',
-        description: '管理系统的功能资源'
-      }, {
-        id: 10003,
-        name: '菜单管理',
-        description: '管理系统的菜单'
-      }, {
-        id: 10004,
-        name: '用户组管理',
-        description: '管理系统的用户组'
-      }, {
-        id: 10005,
-        name: '角色管理',
-        description: '管理系统的角色'
-      }, {
-        id: 10006,
-        name: '用户管理',
-        description: '管理系统用户'
       }]
-    }
+    };
   },
   methods: {
     getInfo () {
@@ -175,28 +127,28 @@ export default {
         }
       }).then(response => {
         if (response.body.success) {
-          this.resForm = response.body.obj
+          this.resForm = response.body.obj;
         } else {
           this.$Modal.error({
             title: '提示',
             content: response.body.msg
-          })
+          });
         }
       }, response => {
         this.$Modal.error({
           title: '提示',
           content: '网络不通！'
-        })
-      })
+        });
+      });
     },
     handleSubmit () {
       this.$refs.resForm.validate((valid) => {
         if (valid) {
-          let url
+          let url;
           if (this.initOption.action === 'add') {
-            url = sysApis.sys.resource.save
+            url = sysApis.sys.resource.save;
           } else if (this.initOption.action === 'edit') {
-            url = sysApis.sys.resource.update
+            url = sysApis.sys.resource.update;
           }
           this.$http.jsonp(url, {
             params: this.resForm
@@ -204,31 +156,35 @@ export default {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',
-                desc: '新菜单保存成功！'
-              })
-              this.$parent.$children[0].query()
-              this.$parent.resFormInitOption.showModal = false
-              this.reset()
+                desc: response.body.msg
+              });
+              this.$parent.$children[0].query();
+              this.$parent.resFormInitOption.showModal = false;
+              this.reset();
             } else {
               this.$Notice.error({
                 title: '提示',
                 desc: response.body.msg
-              })
+              });
             }
           }, response => {
             this.$Notice.error({
               title: '提示',
               desc: '网络异常，请稍后再试！'
-            })
-          })
+            });
+          });
         }
-      })
+      });
     },
     reset () {
-      this.$refs.resForm.resetFields()
+      this.$refs.resForm.resetFields();
     }
+  },
+  components: {
+    SystemCombo,
+    ModuleCombo
   }
-}
+};
 </script>
 <style>
 </style>
