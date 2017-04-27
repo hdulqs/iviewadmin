@@ -80,12 +80,19 @@ export default {
           sid: this.sid
         }
       }).then(response => {
-        this.menuList = response.body.obj;
-        sessionStorage.setItem('system.menus', JSON.stringify(response.body.obj));
+        if (response.body.success) {
+          this.menuList = response.body.obj;
+          sessionStorage.setItem('system.menus', JSON.stringify(response.body.obj));
+        } else {
+          this.$Modal.error({
+            title: '提示',
+            content: response.body.msg
+          });
+        }
       }, response => {
         this.$Modal.error({
           title: '提示',
-          content: response.body.msg
+          content: '网络不通，请稍后再试！'
         });
       });
     },
@@ -96,6 +103,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.ivu-menu-item {
+  border-right: none;
+}
 .ivu-menu-item-selected {
   background-color: #DBDBDB;
 }

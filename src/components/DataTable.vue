@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="datatable">
-    <Row type="flex" class="function">
+    <Row type="flex" justify="end" class="function">
       <Col span="24">
         <slot name="function"></slot>
       </Col>
@@ -16,10 +16,10 @@
         <Row type="flex" justify="center" v-if="hasSearch">
           <Form inline>
             <Form-item>
-              <Button type="primary" @click="query">查询</Button>
+              <Button type="primary" @click="query" icon="search">查询</Button>
             </Form-item>
             <Form-item>
-              <Button type="warning" @click="reset">重置</Button>
+              <Button type="warning" @click="reset" icon="ios-refresh">重置</Button>
             </Form-item>
           </Form>
         </Row>
@@ -33,23 +33,26 @@
             :stripe="stripe"
             :show-header="showHeader"
             :size="size"
-            :context="this.$parent"></Table>
-            <Spin size="large" fix v-if="loading">数据加载中……</Spin>
+            :context="this.$parent"
+            @on-sort-change="sortTable"></Table>
+            <MyLoading size="large" :show="loading"></MyLoading>
         </Col>
       </Row>
       <Row type="flex" justify="center" class="pagination">
         <Col span="24">
-          <Page
-            :current="pageNum"
-            :page-size-opts="pageSizes"
-            :page-size="pageSize"
-            :total="total"
-            @on-page-size-change="sizeChange"
-            @on-change="pageChange"
-            show-total
-            show-elevator
-            show-sizer>
-          </Page>
+          <div style="float: right;">
+            <Page
+              :current="pageNum"
+              :page-size-opts="pageSizes"
+              :page-size="pageSize"
+              :total="total"
+              @on-page-size-change="sizeChange"
+              @on-change="pageChange"
+              show-total
+              show-elevator
+              show-sizer>
+            </Page>
+          </div>
         </Col>
       </Row>
     </Card>
@@ -57,6 +60,8 @@
 </template>
 
 <script>
+import MyLoading from '@/components/MyLoading';
+
 export default {
   name: 'dataTable',
   props: {
@@ -147,6 +152,10 @@ export default {
     pageChange (pageNum) {
       this.pageNum = pageNum;
       this.loadData();
+    },
+    // handle sort
+    sortTable (column, key, order) {
+      console.log(column, key, order);
     }
   },
   computed: {
@@ -160,6 +169,9 @@ export default {
     hasSearch () {
       return !!this.$slots.search;
     }
+  },
+  components: {
+    MyLoading
   }
 };
 </script>

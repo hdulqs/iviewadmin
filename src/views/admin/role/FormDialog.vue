@@ -105,7 +105,7 @@ export default {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',
-                desc: '新角色保存成功！'
+                desc: response.body.msg
               });
               this.$parent.$children[0].query();
               this.$parent.roleFormInitOption.showModal = false;

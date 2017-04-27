@@ -9,13 +9,13 @@
           <Button type="primary" @click="handleAdd">新增</Button>
         </template>
         <template slot="search">
-          <Form-item label="所属系统" :label-width="60">
+          <Form-item label="所属系统" :label-width="60" prop="sid">
             <SystemCombo v-model="searchForm.sid" needAll></SystemCombo>
           </Form-item>
-          <Form-item label="菜单名称" :label-width="60">
+          <Form-item label="菜单名称" :label-width="60" prop="name">
             <Input type="text" v-model="searchForm.name"></Input>
           </Form-item>
-          <Form-item label="url" :label-width="30">
+          <Form-item label="url" :label-width="30" prop="path">
             <Input type="text" v-model="searchForm.path"></Input>
           </Form-item>
         </template>
@@ -36,36 +36,38 @@ export default {
     return {
       sysApis: sysApis,
       columns: [{
-        title: 'ID',
-        key: 'id'
-      }, {
         title: '菜单名称',
-        key: 'name'
+        key: 'name',
+        sortable: 'custom'
       }, {
         title: '所属系统',
-        key: 'sname'
+        key: 'sname',
+        sortable: 'custom'
       }, {
         title: '父菜单',
-        key: 'pid'
+        key: 'pname'
       }, {
-        title: '路径',
+        title: 'url',
         key: 'path'
       }, {
         title: '图标',
         key: 'icon',
+        align: 'center',
         render (row) {
           if (row.icon) {
-            return `<Icon type="#{row.icon}"></Icon>`;
+            return `<Icon size="24" type="${row.icon}"></Icon>`;
           } else {
             return '';
           }
         }
       }, {
         title: '顺序',
-        key: 'sort'
+        key: 'sort',
+        align: 'center'
       }, {
         title: '是否父菜单',
         key: 'isparent',
+        align: 'center',
         render (row) {
           switch (row.isparent) {
             case true:
@@ -83,14 +85,17 @@ export default {
         title: '操作',
         key: 'action',
         render (row, column, index) {
-          return `<i-button type="primary" size="small" @click="handleView('${row.id}')">查看</i-button>
-          <i-button type="warning" size="small" @click="handleEdit('${row.id}')">编辑</i-button>
-          <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')">删除</i-button>`;
+          return `<Button-group>
+                  <i-button type="primary" size="small" @click="handleView('${row.id}')" icon="ios-search"></i-button>
+                  <i-button type="warning" size="small" @click="handleEdit('${row.id}')" icon="edit"></i-button>
+                  <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')" icon="ios-trash"></i-button>
+                  </Button-group>`;
         }
       }],
       searchForm: {
+        sid: '',
         name: '',
-        url: ''
+        path: ''
       },
       menuFormInitOption: {
         title: '',
@@ -105,11 +110,12 @@ export default {
       this.menuFormInitOption.title = '新增菜单';
       this.menuFormInitOption.action = 'add';
       this.menuFormInitOption.showModal = true;
+      this.$children[1].reset();
     },
     handleView (id) {
       this.$Modal.info({
         title: '菜单信息',
-        content: '1111',
+        content: '查看菜单信息',
         scrollable: true
       });
     },

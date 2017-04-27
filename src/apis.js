@@ -63,7 +63,8 @@ let sysApis = {
       update: root + '/sys/user/update',
       delete: root + '/sys/user/delete',
       get: root + '/sys/user/get',
-      find: root + '/sys/user/find'
+      find: root + '/sys/user/find',
+      lockOrUnlock: root + '/sys/user/lockOrUnlock'
     },
     syslog: {
       find: root + '/sys/syslog/find',

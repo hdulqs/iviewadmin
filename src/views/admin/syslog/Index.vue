@@ -181,7 +181,7 @@ export default {
         title: '操作',
         key: 'action',
         render (row, column, index) {
-          return `<i-button type="primary" size="small" @click="handleView('${row.id}')">查看</i-button>`;
+          return `<i-button type="primary" size="small" @click="handleView('${row.id}')" icon="search"></i-button>`;
         }
       }],
       searchForm: {

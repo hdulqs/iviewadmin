@@ -24,8 +24,8 @@
           <Form-item label="状态" :label-width="40" prop="status">
             <Select v-model="searchForm.status">
               <Option label="全部" value=""></Option>
-              <Option label="正常" value="0"></Option>
-              <Option label="禁用" value="1"></Option>
+              <Option label="正常" value="1"></Option>
+              <Option label="禁用" value="0"></Option>
             </Select>
           </Form-item>
         </template>
@@ -45,9 +45,6 @@ export default {
     return {
       sysApis: sysApis,
       columns: [{
-        title: 'ID',
-        key: 'id'
-      }, {
         title: '用户名',
         key: 'username'
       }, {
@@ -59,22 +56,27 @@ export default {
       }, {
         title: '启用状态',
         key: 'status',
+        align: 'center',
         render (row) {
           if (row.status === '1') {
-            return '启用';
+            return `<Tag color="green">启用</Tag>`;
           } else if (row.status === '0') {
-            return '禁用';
+            return `<Tag color="red">禁用</Tag>`;
           } else {
-            return '未知状态';
+            return `<Tag color="yellow">未知状态</Tag>`;
           }
         }
       }, {
         title: '操作',
         key: 'action',
         render (row, column, index) {
-          return `<i-button type="primary" size="small" @click="handleView('${row.id}')">查看</i-button>
-          <i-button type="warning" size="small" @click="handleEdit('${row.id}')">编辑</i-button>
-          <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')">删除</i-button>`;
+          return `<Button-group>
+                  <i-button type="primary" size="small" @click="handleView('${row.id}')" icon="ios-search"></i-button>
+                  <i-button type="warning" size="small" @click="handleEdit('${row.id}')" icon="edit"></i-button>
+                  <i-button type="warning" size="small" @click="lockOrUnlockUser('${row.id}', '${row.name}', '1')" icon="ios-unlocked" v-if="!${row.status}"></i-button>
+                  <i-button type="error" size="small" @click="lockOrUnlockUser('${row.id}', '${row.name}', '0')" icon="ios-locked" v-if="${row.status}"></i-button>
+                  <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')" icon="ios-trash"></i-button>
+                  </Button-group>`;
         }
       }],
       searchForm: {
@@ -101,7 +103,7 @@ export default {
     handleView (id) {
       this.$Modal.info({
         title: '用户信息',
-        content: '1111',
+        content: '查看用户信息',
         scrollable: true
       });
     },
@@ -126,6 +128,44 @@ export default {
               this.$Notice.success({
                 title: '提示',
                 desc: '【' + name + '】删除成功！'
+              });
+              this.$children[0].query();
+            } else {
+              this.$Notice.error({
+                title: '提示',
+                desc: response.body.msg
+              });
+            }
+          }, response => {
+            this.$Notice.error({
+              title: '提示',
+              desc: '网络连接失败，请稍后再试！'
+            });
+          });
+        }
+      });
+    },
+    lockOrUnlockUser (id, name, status) {
+      let title = '';
+      if (status === '0') {
+        title = '锁定';
+      } else if (status === '1') {
+        title = '解锁';
+      }
+      this.$Modal.confirm({
+        title: '请确认',
+        content: '确定' + title + '【' + name + '】用户？',
+        onOk: () => {
+          this.$http.jsonp(sysApis.sys.user.lockOrUnlock, {
+            params: {
+              id: id,
+              status: status
+            }
+          }).then(response => {
+            if (response.body.success) {
+              this.$Notice.success({
+                title: '提示',
+                desc: title + '【' + name + '】用户成功！'
               });
               this.$children[0].query();
             } else {

@@ -55,6 +55,9 @@ export default {
       }).then(response => {
         if (response.body.success) {
           this.systemList = response.body.obj.list;
+          if (this.currentValue) {
+            this.setCurrentValue(this.currentValue);
+          }
           // if (!this.needAll && this.systemList.length > 0) {
           //   this.setCurrentValue(response.body.obj.list[0].id)
           // }
@@ -73,6 +76,11 @@ export default {
     },
     setCurrentValue (val) {
       this.$emit('input', val);
+    }
+  },
+  watch: {
+    value (val) {
+      this.currentValue = val;
     }
   }
 };

@@ -67,6 +67,11 @@ export default {
     setCurrentValue (val) {
       this.$emit('input', val)
     }
+  },
+  watch: {
+    value (val) {
+      this.currentValue = val;
+    }
   }
 }
 </script>

@@ -82,6 +82,9 @@ export default {
     sid (val) {
       this.$refs.menuCombo.clearSingleSelect();
       this.getMenuList();
+    },
+    value (val) {
+      this.currentValue = val;
     }
   }
 };

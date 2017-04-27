@@ -6,7 +6,7 @@
         :columns="columns"
         :searchForm="searchForm">
         <template slot="function">
-          <Button type="primary" @click="handleAdd">新增</Button>
+          <Button type="primary" @click="handleAdd" icon="ios-plus">新增</Button>
         </template>
         <template slot="search">
           <Form-item label="所属系统" :label-width="60" prop="sid">
@@ -33,9 +33,6 @@ export default {
     return {
       sysApis: sysApis,
       columns: [{
-        title: 'ID',
-        key: 'id'
-      }, {
         title: '所属系统',
         key: 'sname'
       }, {
@@ -48,9 +45,11 @@ export default {
         title: '操作',
         key: 'action',
         render (row, column, index) {
-          return `<i-button type="primary" size="small" @click="handleView('${row.id}')">查看</i-button>
-          <i-button type="warning" size="small" @click="handleEdit('${row.id}')">编辑</i-button>
-          <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')">删除</i-button>`;
+          return `<Button-group>
+                  <i-button type="primary" size="small" @click="handleView('${row.id}')" icon="ios-search"></i-button>
+                  <i-button type="warning" size="small" @click="handleEdit('${row.id}')" icon="edit"></i-button>
+                  <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')" icon="ios-trash"></i-button>
+                  </Button-group>`;
         }
       }],
       searchForm: {
@@ -75,7 +74,7 @@ export default {
     handleView (id) {
       this.$Modal.info({
         title: '模块信息',
-        content: '1111',
+        content: '查看模块信息',
         scrollable: true
       });
     },

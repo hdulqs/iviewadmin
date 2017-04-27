@@ -29,9 +29,6 @@ export default {
     return {
       sysApis: sysApis,
       columns: [{
-        title: 'ID',
-        key: 'id'
-      }, {
         title: '角色名称',
         key: 'name'
       }, {
@@ -41,9 +38,11 @@ export default {
         title: '操作',
         key: 'action',
         render (row, column, index) {
-          return `<i-button type="primary" size="small" @click="handleView('${row.id}')">查看</i-button>
-          <i-button type="warning" size="small" @click="handleEdit('${row.id}')">编辑</i-button>
-          <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')">删除</i-button>`;
+          return `<Button-group>
+                  <i-button type="primary" size="small" @click="handleView('${row.id}')" icon="ios-search"></i-button>
+                  <i-button type="warning" size="small" @click="handleEdit('${row.id}')" icon="edit"></i-button>
+                  <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')" icon="ios-trash"></i-button>
+                  </Button-group>`;
         }
       }],
       searchForm: {
@@ -62,11 +61,12 @@ export default {
       this.roleFormInitOption.title = '新增角色';
       this.roleFormInitOption.action = 'add';
       this.roleFormInitOption.showModal = true;
+      this.$children[1].reset();
     },
     handleView (id) {
       this.$Modal.info({
         title: '角色信息',
-        content: '1111',
+        content: '查看角色信息',
         scrollable: true
       });
     },

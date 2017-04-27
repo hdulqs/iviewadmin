@@ -18,27 +18,29 @@
       <Form-item label="菜单名称" prop="name">
         <Input type="text" v-model="menuForm.name" placeholder="请输入菜单名称"></Input>
       </Form-item>
-      <Form-item label="父菜单">
+      <Form-item label="父菜单" prop="isparent">
         <i-switch v-model="menuForm.isparent"></i-switch>
       </Form-item>
-      <Form-item label="所属系统">
+      <Form-item label="所属系统" prop="sid">
         <SystemCombo v-model="menuForm.sid" show-desc></SystemCombo>
       </Form-item>
-      <Form-item label="上级菜单">
+      <Form-item label="上级菜单" prop="pid">
         <MenuCombo
           v-model="menuForm.pid"
           isparent
           :sid="menuForm.sid"
           :disabled="menuForm.isparent"></MenuCombo>
       </Form-item>
-      <Form-item label="路径">
+      <Form-item label="路径" prop="path">
         <Input type="text" v-model="menuForm.path"></Input>
       </Form-item>
-      <Form-item label="顺序">
+      <Form-item label="顺序" prop="sort">
         <Slider v-model="menuForm.sort" show-input></Slider>
       </Form-item>
-      <Form-item label="图标">
-        <Input type="text" v-model="menuForm.icon"></Input>
+      <Form-item label="图标" prop="icon">
+        <Input type="text" v-model="menuForm.icon" :icon="menuForm.icon">
+          <Button slot="append" icon="ios-search" @click="showIcons"></Button>
+        </Input>
       </Form-item>
       <Form-item label="描述" prop="description">
         <Input
@@ -86,9 +88,6 @@ export default {
         ],
         sid: [
           {required: true, type: 'string', message: '所属系统必选', trigger: 'change'}
-        ],
-        path: [
-          {required: true, type: 'string', message: ''}
         ]
       },
       menuForm: {
@@ -181,6 +180,18 @@ export default {
     },
     reset () {
       this.$refs.menuForm.resetFields();
+    },
+    showIcons () {
+      this.$Modal.info({
+        title: '选择图标',
+        content: '<Radio-group v-model="chooseIcon">' +
+                    '<Radio label="social-apple"><Icon type="social-apple"></Icon></Radio>' +
+                  '</Radio-group>',
+        onOk: () => {
+          this.chooseIcon = 'social-apple';
+          this.menuForm.icon = this.chooseIcon;
+        }
+      });
     }
   },
   watch: {

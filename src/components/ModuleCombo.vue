@@ -85,6 +85,9 @@ export default {
     sid (val) {
       this.$refs.moduleCombo.clearSingleSelect();
       this.getModuleList();
+    },
+    value (val) {
+      this.currentValue = val;
     }
   }
 };
