@@ -151,5 +151,14 @@ export default {
         }
       }
     }
+  },
+  .my-combo {
+    line-height: 30px;
+    height: 30px;
+    width: 100%;
+    &:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
   }
 </style>

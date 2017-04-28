@@ -1,8 +1,8 @@
 <template>
   <div id="moduleCombo">
-    <Select
+    <!-- <Select
       ref="moduleCombo"
-      :value="currentValue"
+      :value="value"
       clearable
       filterable
       @on-change="setCurrentValue">
@@ -13,7 +13,11 @@
           <span style="float:right;color:#ccc">{{m.description}}</span>
         </template>
       </Option>
-    </Select>
+    </Select> -->
+    <select class="my-combo" :value="currentValue" @change="setCurrentValue($event.target.value)">
+      <option value="" v-if="needAll">全部</option>
+      <option :value="m.id" v-for="m in moduleList" key="m.id">{{m.name}}</option>
+    </select>
   </div>
 </template>
 <script>
@@ -61,9 +65,13 @@ export default {
       }).then(response => {
         if (response.body.success) {
           this.moduleList = response.body.obj.list;
-          // if (!this.needAll && this.moduleList.length > 0) {
-          //   this.setCurrentValue(response.body.obj.list[0].id)
-          // }
+          if (!this.needAll && this.moduleList.length > 0) {
+            if (this.value !== null && this.value !== '' && this.value !== undefined) {
+              this.setCurrentValue(this.value);
+            } else {
+              this.setCurrentValue(response.body.obj.list[0].id);
+            }
+          }
         } else {
           this.$Modal.error({
             title: '提示',
@@ -78,16 +86,18 @@ export default {
       });
     },
     setCurrentValue (val) {
+      this.currentValue = val;
       this.$emit('input', val);
     }
   },
   watch: {
     sid (val) {
-      this.$refs.moduleCombo.clearSingleSelect();
+      this.setCurrentValue(null);
+      // this.$refs.moduleCombo.clearSingleSelect();
       this.getModuleList();
     },
     value (val) {
-      this.currentValue = val;
+      this.setCurrentValue(val);
     }
   }
 };

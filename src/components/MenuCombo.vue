@@ -1,6 +1,6 @@
 <template>
   <div id="menuCombo">
-    <Select
+    <!-- <Select
       ref="menuCombo"
       :value="currentValue"
       clearable
@@ -9,7 +9,14 @@
       @on-change="setCurrentValue">
       <Option :value="m.id" :label="m.name" v-for="m in menuList" :key="m.id">
       </Option>
-    </Select>
+    </Select> -->
+    <select 
+      class="my-combo" 
+      :value="currentValue"
+      :disabled="disabled"
+      @change="setCurrentValue($event.target.value)">
+      <option :value="m.id" v-for="m in menuList" key="m.id">{{m.name}}</option>
+    </select>
   </div>
 </template>
 <script>
@@ -75,16 +82,18 @@ export default {
       });
     },
     setCurrentValue (val) {
+      this.currentValue = val;
       this.$emit('input', val);
     }
   },
   watch: {
     sid (val) {
-      this.$refs.menuCombo.clearSingleSelect();
+      // this.$refs.menuCombo.clearSingleSelect();
+      this.setCurrentValue(null);
       this.getMenuList();
     },
     value (val) {
-      this.currentValue = val;
+      this.setCurrentValue(val);
     }
   }
 };

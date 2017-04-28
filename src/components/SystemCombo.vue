@@ -1,6 +1,6 @@
 <template>
   <div id="systemCombo">
-    <Select
+    <!-- <Select
       :value="currentValue"
       clearable
       filterable
@@ -12,7 +12,11 @@
           <span style="float:right;color:#ccc">{{s.description}}</span>
         </template>
       </Option>
-    </Select>
+    </Select> -->
+    <select class="my-combo" :value="currentValue" @change="setCurrentValue($event.target.value)">
+      <option value="" v-if="needAll">全部</option>
+      <option :value="s.id" v-for="s in systemList" key="s.id">{{s.name}}</option>
+    </select>
   </div>
 </template>
 <script>
@@ -55,12 +59,9 @@ export default {
       }).then(response => {
         if (response.body.success) {
           this.systemList = response.body.obj.list;
-          if (this.currentValue) {
-            this.setCurrentValue(this.currentValue);
+          if (!this.needAll && this.systemList.length > 0) {
+            this.setCurrentValue(response.body.obj.list[0].id);
           }
-          // if (!this.needAll && this.systemList.length > 0) {
-          //   this.setCurrentValue(response.body.obj.list[0].id)
-          // }
         } else {
           this.$Modal.error({
             title: '提示',
@@ -75,12 +76,13 @@ export default {
       });
     },
     setCurrentValue (val) {
+      this.currentValue = val;
       this.$emit('input', val);
     }
   },
   watch: {
     value (val) {
-      this.currentValue = val;
+      this.setCurrentValue(val);
     }
   }
 };
