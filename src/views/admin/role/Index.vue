@@ -82,7 +82,7 @@ export default {
         title: '请确认',
         content: '确定删除【' + name + '】角色？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.role.delete, {
+          this.$http.get(sysApis.sys.role.delete, {
             params: {
               id: id
             }

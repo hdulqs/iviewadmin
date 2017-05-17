@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     getInfo () {
-      this.$http.jsonp(sysApis.sys.menu.get, {
+      this.$http.get(sysApis.sys.menu.get, {
         params: {
           id: this.initOption.id
         }
@@ -152,9 +152,7 @@ export default {
           } else if (this.initOption.action === 'edit') {
             url = sysApis.sys.menu.update;
           }
-          this.$http.jsonp(url, {
-            params: this.menuForm
-          }).then(response => {
+          this.$http.post(url, this.menuForm).then(response => {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',

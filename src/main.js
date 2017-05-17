@@ -15,6 +15,15 @@ Vue.use(VueResource);
 
 Vue.component('charts', VueEcharts);
 
+Vue.http.options.root = process.env.BASE_API;
+Vue.http.interceptors.push(function (request, next) {
+  let token = sessionStorage.getItem('Authorization');
+  if (token !== null && token !== undefined && token !== '') {
+    request.headers.set('Authorization', token);
+  }
+  next();
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     getInfo () {
-      this.$http.jsonp(sysApis.sys.role.get, {
+      this.$http.get(sysApis.sys.role.get, {
         params: {
           id: this.initOption.id
         }
@@ -99,9 +99,7 @@ export default {
           } else if (this.initOption.action === 'edit') {
             url = sysApis.sys.role.update;
           }
-          this.$http.jsonp(url, {
-            params: this.roleForm
-          }).then(response => {
+          this.$http.post(url, this.roleForm).then(response => {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',

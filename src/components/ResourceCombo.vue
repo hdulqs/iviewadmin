@@ -15,6 +15,8 @@
   </div>
 </template>
 <script>
+import sysApis from '../apis';
+
 export default {
   name: 'resourceCombo',
   props: {
@@ -29,25 +31,23 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      this.getResourceList()
-    })
+      this.getResourceList();
+    });
   },
   data () {
     return {
       currentValue: this.value,
       resourceList: []
-    }
+    };
   },
   methods: {
     getResourceList () {
-      this.systemList = []
-      this.$http.jsonp(sysApis.sys.resource.find, {
-        params: {
-          pageSize: 50
-        }
+      this.systemList = [];
+      this.$http.post(sysApis.sys.resource.find, {
+        pageSize: 50
       }).then(response => {
         if (response.body.success) {
-          this.resourceList = response.body.obj.list
+          this.resourceList = response.body.obj.list;
           // if (this.resourceList.length > 0) {
           //   this.setCurrentValue(response.body.obj.list[0].id)
           // }
@@ -55,17 +55,17 @@ export default {
           this.$Modal.error({
             title: '提示',
             content: response.body.msg
-          })
+          });
         }
       }, response => {
         this.$Modal.error({
           title: '提示',
           content: '网络不通，无法加载系统列表！'
-        })
-      })
+        });
+      });
     },
     setCurrentValue (val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     }
   },
   watch: {
@@ -73,7 +73,7 @@ export default {
       this.currentValue = val;
     }
   }
-}
+};
 </script>
 <style>
 </style>

@@ -10,8 +10,8 @@
       <Option :value="m.id" :label="m.name" v-for="m in menuList" :key="m.id">
       </Option>
     </Select> -->
-    <select 
-      class="my-combo" 
+    <select
+      class="my-combo"
       :value="currentValue"
       :disabled="disabled"
       @change="setCurrentValue($event.target.value)">
@@ -56,12 +56,10 @@ export default {
   methods: {
     getMenuList () {
       this.menuList = [];
-      this.$http.jsonp(sysApis.sys.menu.find, {
-        params: {
-          pageSize: 50,
-          isparent: this.isparent,
-          sid: this.sid
-        }
+      this.$http.post(sysApis.sys.menu.find, {
+        pageSize: 50,
+        isparent: this.isparent,
+        sid: this.sid
       }).then(response => {
         if (response.body.success) {
           this.menuList = response.body.obj.list;

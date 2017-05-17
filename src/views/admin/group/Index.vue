@@ -85,7 +85,7 @@ export default {
         title: '请确认',
         content: '确定删除【' + name + '】分组？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.group.delete, {
+          this.$http.get(sysApis.sys.group.delete, {
             params: {
               id: id
             }

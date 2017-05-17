@@ -131,7 +131,7 @@ export default {
         title: '请确认',
         content: '确定删除【' + name + '】菜单？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.menu.delete, {
+          this.$http.get(sysApis.sys.menu.delete, {
             params: {
               id: id
             }

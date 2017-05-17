@@ -52,10 +52,8 @@ export default {
   methods: {
     getSystemList () {
       this.systemList = [];
-      this.$http.jsonp(sysApis.sys.system.find, {
-        params: {
-          pageSize: 50
-        }
+      this.$http.post(sysApis.sys.system.find, {
+        pageSize: 50
       }).then(response => {
         if (response.body.success) {
           this.systemList = response.body.obj.list;

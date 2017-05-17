@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     getMenus () {
-      this.$http.jsonp(sysApis.sys.menu.tree, {
+      this.$http.get(sysApis.sys.menu.tree, {
         params: {
           sid: this.sid
         }

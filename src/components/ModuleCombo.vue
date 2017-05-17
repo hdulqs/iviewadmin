@@ -57,11 +57,9 @@ export default {
   methods: {
     getModuleList () {
       this.moduleList = [];
-      this.$http.jsonp(sysApis.sys.module.find, {
-        params: {
-          sid: this.sid,
-          pageSize: 50
-        }
+      this.$http.post(sysApis.sys.module.find, {
+        sid: this.sid,
+        pageSize: 50
       }).then(response => {
         if (response.body.success) {
           this.moduleList = response.body.obj.list;

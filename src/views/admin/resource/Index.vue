@@ -120,7 +120,7 @@ export default {
         title: '请确认',
         content: '确定删除【' + name + '】资源？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.resource.delete, {
+          this.$http.get(sysApis.sys.resource.delete, {
             params: {
               id: id
             }

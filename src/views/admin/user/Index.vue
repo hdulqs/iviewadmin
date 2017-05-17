@@ -119,7 +119,7 @@ export default {
         title: '请确认',
         content: '确定删除【' + name + '】用户？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.user.delete, {
+          this.$http.get(sysApis.sys.user.delete, {
             params: {
               id: id
             }
@@ -156,7 +156,7 @@ export default {
         title: '请确认',
         content: '确定' + title + '【' + name + '】用户？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.user.lockOrUnlock, {
+          this.$http.get(sysApis.sys.user.lockOrUnlock, {
             params: {
               id: id,
               status: status

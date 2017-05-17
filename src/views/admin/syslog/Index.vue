@@ -241,7 +241,7 @@ export default {
   },
   methods: {
     handleView (id) {
-      this.$http.jsonp(sysApis.sys.syslog.get, {
+      this.$http.get(sysApis.sys.syslog.get, {
         params: {
           id: id
         }

@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     getInfo () {
-      this.$http.jsonp(sysApis.sys.module.get, {
+      this.$http.get(sysApis.sys.module.get, {
         params: {
           id: this.initOption.id
         }
@@ -108,9 +108,7 @@ export default {
           } else if (this.initOption.action === 'edit') {
             url = sysApis.sys.module.update;
           }
-          this.$http.jsonp(url, {
-            params: this.moduleForm
-          }).then(response => {
+          this.$http.post(url, this.moduleForm).then(response => {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',
@@ -139,7 +137,7 @@ export default {
     },
     getSystemOptions (search, loading) {
       // loading(true)
-      this.$http.jsonp(sysApis.sys.system.find, {
+      this.$http.get(sysApis.sys.system.find, {
         params: {
           pageSize: 50
         }

@@ -123,7 +123,7 @@ export default {
   methods: {
     getInfo () {
       this.loading = true;
-      this.$http.jsonp(sysApis.sys.resource.get, {
+      this.$http.get(sysApis.sys.resource.get, {
         params: {
           id: this.initOption.id
         }
@@ -154,9 +154,7 @@ export default {
           } else if (this.initOption.action === 'edit') {
             url = sysApis.sys.resource.update;
           }
-          this.$http.jsonp(url, {
-            params: this.resForm
-          }).then(response => {
+          this.$http.post(url, this.resForm).then(response => {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',

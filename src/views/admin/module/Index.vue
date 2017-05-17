@@ -90,7 +90,7 @@ export default {
         title: '请确认',
         content: '确定删除【' + name + '】模块？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.module.delete, {
+          this.$http.get(sysApis.sys.module.delete, {
             params: {
               id: id
             }

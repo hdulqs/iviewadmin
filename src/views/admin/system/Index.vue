@@ -82,7 +82,7 @@ export default {
         title: '请确认',
         content: '确定删除【' + name + '】系统？',
         onOk: () => {
-          this.$http.jsonp(sysApis.sys.system.delete, {
+          this.$http.get(sysApis.sys.system.delete, {
             params: {
               id: id
             }

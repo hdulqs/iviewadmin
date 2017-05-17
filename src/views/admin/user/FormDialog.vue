@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     getInfo () {
-      this.$http.jsonp(sysApis.sys.user.get, {
+      this.$http.get(sysApis.sys.user.get, {
         params: {
           id: this.initOption.id
         }
@@ -113,9 +113,7 @@ export default {
           } else if (this.initOption.action === 'edit') {
             url = sysApis.sys.user.update;
           }
-          this.$http.jsonp(url, {
-            params: this.userForm
-          }).then(response => {
+          this.$http.post(url, this.userForm).then(response => {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',

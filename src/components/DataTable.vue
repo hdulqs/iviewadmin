@@ -113,9 +113,7 @@ export default {
     // load remote data
     loadData () {
       this.loading = true;
-      this.$http.jsonp(this.url, {
-        params: this.params
-      }).then((response) => {
+      this.$http.post(this.url, this.params).then((response) => {
         if (response.body.success) {
           this.tableData = response.body.obj.list;
           this.total = response.body.obj.total;
