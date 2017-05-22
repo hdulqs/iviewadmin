@@ -63,14 +63,16 @@ let sysApis = {
       delete: 'sys/user/delete',
       get: 'sys/user/get',
       find: 'sys/user/find',
-      lockOrUnlock: 'sys/user/lockOrUnlock'
+      lockOrUnlock: 'sys/user/lockOrUnlock',
+      grantGroup: 'sys/user/grantGroup'
     },
     syslog: {
       find: 'sys/syslog/find',
       get: 'sys/syslog/get'
     },
     tokens: {
-      login: 'tokens/login'
+      login: 'tokens/login',
+      refresh: 'tokens/refresh'
     }
   }
 };

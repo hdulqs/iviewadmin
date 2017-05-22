@@ -8,6 +8,15 @@
 	        <i-button type="text" @click="toggleClick">
 	          <Icon type="navicon" size="32"></Icon>
 	        </i-button>
+          <Dropdown @on-click="handleDropdown" class="right">
+            <a href="javascript:void(0)">
+                {{user.username}}
+                <Icon type="arrow-down-b"></Icon>
+            </a>
+            <Dropdown-menu slot="list">
+                <Dropdown-item name="logout">注销</Dropdown-item>
+            </Dropdown-menu>
+        </Dropdown>
 	      </div>
 	      <div class="layout-breadcrumb">
 	        <Breadcrumb>
@@ -30,7 +39,8 @@ export default {
     return {
       spanLeft: 4,
       spanRight: 20,
-      menus: sessionStorage.getItem('system.menus') ? JSON.parse(sessionStorage.getItem('system.menus')) : []
+      menus: sessionStorage.getItem('system.menus') ? JSON.parse(sessionStorage.getItem('system.menus')) : [],
+      user: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : {}
     };
   },
   computed: {
@@ -70,6 +80,20 @@ export default {
       } else {
         this.spanLeft = 4;
         this.spanRight = 20;
+      }
+    },
+    handleDropdown (name) {
+      switch (name) {
+        case 'logout':
+          this.$Modal.confirm({
+            title: '注销',
+            content: '确定退出系统？',
+            onOk: () => {
+              sessionStorage.clear();
+              this.$router.push('/');
+            }
+          });
+          break;
       }
     }
   },
@@ -129,6 +153,11 @@ export default {
         height: 60px;
         background: #fff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
+
+        .right {
+          float: right;
+          padding: 20px;
+        }
       }
       .layout-breadcrumb{
         padding: 10px 15px 0;

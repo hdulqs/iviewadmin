@@ -1,8 +1,10 @@
 <template lang="html">
-  <div class="layout-content">
-    <div class="layout-content-main">
-      <Icon type="android-sad" :size="128"></Icon>
-      <p>您访问的页面已消失在太空！</p>
+  <div class="layout">
+    <div class="layout-content">
+      <div class="layout-content-main">
+        <Icon type="android-sad" :size="128"></Icon>
+        <p>您访问的页面已消失在太空！</p>
+      </div>
     </div>
   </div>
 </template>

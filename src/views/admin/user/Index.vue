@@ -31,6 +31,7 @@
         </template>
       </DataTable>
       <FormDialog :initOption="userFormInitOption"></FormDialog>
+      <GroupCheckBoxs :initOption="initGroupCheckbox"></GroupCheckBoxs>
     </div>
   </div>
 </template>
@@ -38,6 +39,7 @@
 import DataTable from '@/components/DataTable';
 import FormDialog from '@/views/admin/user/FormDialog';
 import sysApis from '../../../apis';
+import GroupCheckBoxs from './GroupCheckBoxs';
 
 export default {
   name: 'sysUserIndex',
@@ -69,14 +71,21 @@ export default {
       }, {
         title: '操作',
         key: 'action',
+        width: 80,
         render (row, column, index) {
-          return `<Button-group>
-                  <i-button type="primary" size="small" @click="handleView('${row.id}')" icon="ios-search"></i-button>
-                  <i-button type="warning" size="small" @click="handleEdit('${row.id}')" icon="edit"></i-button>
-                  <i-button type="warning" size="small" @click="lockOrUnlockUser('${row.id}', '${row.name}', '1')" icon="ios-unlocked" v-if="!${row.status}"></i-button>
-                  <i-button type="error" size="small" @click="lockOrUnlockUser('${row.id}', '${row.name}', '0')" icon="ios-locked" v-if="${row.status}"></i-button>
-                  <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')" icon="ios-trash"></i-button>
-                  </Button-group>`;
+          return `<Dropdown
+                    trigger="click"
+                    @on-click="handle(row, $event)">
+                    <i-button type="ghost" icon="ios-more"></i-button>
+                    <Dropdown-menu slot="list">
+                      <Dropdown-item name="view">查看</Dropdown-item>
+                      <Dropdown-item name="edit">编辑</Dropdown-item>
+                      <Dropdown-item name="delete">删除</Dropdown-item>
+                      <Dropdown-item name="unlockUser" v-if="!${row.status}">启用</Dropdown-item>
+                      <Dropdown-item name="lockUser" v-if="${row.status}">禁用</Dropdown-item>
+                      <Dropdown-item name="grantGroup">分组</Dropdown-item>
+                    </Dropdown-menu>
+                  </Dropdown>`;
         }
       }],
       searchForm: {
@@ -90,6 +99,10 @@ export default {
         action: '',
         showModal: false,
         id: ''
+      },
+      initGroupCheckbox: {
+        id: '',
+        visible: false
       }
     };
   },
@@ -114,10 +127,10 @@ export default {
       this.userFormInitOption.id = id;
       this.$children[1].getInfo();
     },
-    hanldeDelete (id, name) {
+    hanldeDelete (id) {
       this.$Modal.confirm({
         title: '请确认',
-        content: '确定删除【' + name + '】用户？',
+        content: '确定删除该用户？',
         onOk: () => {
           this.$http.get(sysApis.sys.user.delete, {
             params: {
@@ -127,7 +140,7 @@ export default {
             if (response.body.success) {
               this.$Notice.success({
                 title: '提示',
-                desc: '【' + name + '】删除成功！'
+                desc: '该用户已成功删除！'
               });
               this.$children[0].query();
             } else {
@@ -148,9 +161,9 @@ export default {
     lockOrUnlockUser (id, name, status) {
       let title = '';
       if (status === '0') {
-        title = '锁定';
+        title = '禁用';
       } else if (status === '1') {
-        title = '解锁';
+        title = '启用';
       }
       this.$Modal.confirm({
         title: '请确认',
@@ -182,11 +195,39 @@ export default {
           });
         }
       });
+    },
+    handle (row, operator) {
+      switch (operator) {
+        case 'view':
+          this.handleView(row.id);
+          break;
+        case 'edit':
+          this.handleEdit(row.id);
+          break;
+        case 'delete':
+          this.hanldeDelete(row.id);
+          break;
+        case 'lockUser':
+          this.lockOrUnlockUser(row.id, row.name, 0);
+          break;
+        case 'unlockUser':
+          this.lockOrUnlockUser(row.id, row.name, 1);
+          break;
+        case 'grantGroup':
+          this.grantGroup(row.id);
+          break;
+      }
+    },
+    grantGroup (id) {
+      console.log(id);
+      this.initGroupCheckbox.id = id;
+      this.initGroupCheckbox.visible = true;
     }
   },
   components: {
     DataTable,
-    FormDialog
+    FormDialog,
+    GroupCheckBoxs
   }
 };
 </script>

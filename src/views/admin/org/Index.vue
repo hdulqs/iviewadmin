@@ -37,10 +37,18 @@ export default {
       }, {
         title: '操作',
         key: 'action',
+        width: 80,
         render (row, column, index) {
-          return `<i-button type="primary" size="small" @click="handleView('${row.id}')">查看</i-button>
-          <i-button type="warning" size="small" @click="handleEdit('${row.id}')">编辑</i-button>
-          <i-button type="error" size="small" @click="hanldeDelete('${row.id}', '${row.name}')">删除</i-button>`;
+          return `<Dropdown
+                    trigger="click"
+                    @on-click="handle(row, $event)">
+                    <i-button type="ghost" icon="ios-more"></i-button>
+                    <Dropdown-menu slot="list">
+                      <Dropdown-item name="view">查看</Dropdown-item>
+                      <Dropdown-item name="edit">编辑</Dropdown-item>
+                      <Dropdown-item name="delete">删除</Dropdown-item>
+                    </Dropdown-menu>
+                  </Dropdown>`;
         }
       }],
       searchForm: {
@@ -104,6 +112,19 @@ export default {
           });
         }
       });
+    },
+    handle (row, operator) {
+      switch (operator) {
+        case 'view':
+          this.handleView(row.id);
+          break;
+        case 'edit':
+          this.handleEdit(row.id);
+          break;
+        case 'delete':
+          this.hanldeDelete(row.id, row.name);
+          break;
+      }
     }
   },
   components: {

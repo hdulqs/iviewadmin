@@ -58,11 +58,18 @@ export default {
           this.logingLoading = true;
           this.$http.post(Apis.sys.tokens.login, this.loginForm).then((response) => {
             let obj = response.data;
-            console.log(obj);
+            // console.log(obj);
             if (obj.success) {
               let token = obj.obj.tokenObj.tokenType + ' ' + obj.obj.tokenObj.accessToken;
               sessionStorage.setItem('Authorization', token);
+              sessionStorage.setItem('user', JSON.stringify(obj.obj.user));
               this.$Message.success(obj.msg);
+              setInterval(() => {
+                this.$http.get(Apis.sys.tokens.refresh).then((response) => {
+                  let token = obj.obj.tokenObj.tokenType + ' ' + obj.obj.tokenObj.accessToken;
+                  sessionStorage.setItem('Authorization', token);
+                });
+              }, obj.obj.tokenObj.expiresIn - (1000 * 60 * 5));
               this.$router.push('/');
             } else {
               this.$Message.error(obj.msg);
